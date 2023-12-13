@@ -24,8 +24,8 @@ Light_intensity = 3500
 Battery_percentage = 30
 energy_reading = 20
 timestamp = ""
-weather = ""
-advice = ""
+weather = "Weather not so favorable for energy generation"
+advice = "Reduce energy use on both lab & office"
 
 csv_file_path = 'database.csv'
 fieldnames = ['TIMESTAMP', 'LIGHT', 'TEMPERATURE', 'HUMIDITY', 'BATTERY_PERCENTAGE', 'RESULT']
@@ -225,4 +225,4 @@ def predict_user_input():
 # Assuming you have a list of locations
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=False)
