@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     pollForRealTimeData();
 
     // Set up polling to fetch real-time data every 5 seconds (adjust as needed)
-    setInterval(pollForRealTimeData, 5000);
+    setInterval(pollForRealTimeData, 7000);
 
     // Toggle Buttons
     const toggleButtons = document.querySelectorAll(".toggle");
@@ -117,5 +117,5 @@ document.addEventListener("DOMContentLoaded", function () {
     fetchData();
 
     // Call fetchData every 2000 milliseconds (2 seconds)
-    setInterval(fetchData, 2000);
+    setInterval(fetchData, 5000);
 });
