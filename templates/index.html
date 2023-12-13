@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOLAR OUTPUT CONTROLLER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</head>
+
+<body>
+    <div class="img"></div>
+    <div class="content">
+        <div><img src="{{ url_for('static', filename='images/fut-logo.png') }}" alt="school logo" class="logo" /></div>
+        <div class="header">
+            <div>
+                <h1>FEDERAL UNIVERSITY OF TECHNOLOGY, MINNA.</h1>
+            </div>
+            <div class="sub-header">
+                <h2>SOLAR OUTPUT CONTROLLER</h2>
+            </div>
+        </div>
+        <div class="tab" id="advice-tab">
+            <div class="advice-container">
+                <h1 class="advice-title">Weather: </h1>
+                <h2 id="weather-box"> </h2>
+            </div>
+            <div class="advice-container">
+                <h1 class="advice-title">Advice: </h1>
+                <h2 id="advice-box"> </h2>
+            </div>
+        </div>
+        <div id="appliance-container">
+            <h3 class="toggle-header">Toggle Appliances</h3>
+            <div id="toggle-container">
+                <div class="appliance">
+                    <h2>Office</h2>
+                    <p class="status">Off</p>
+                    <button class="toggle" onclick="toggleStatus(this, 1)">Toggle</button>
+                </div>
+                <div class="appliance">
+                    <h2>Laboratory</h2>
+                    <p class="status">Off</p>
+                    <button class="toggle" onclick="toggleStatus(this, 1)">Toggle</button>
+                </div>
+            </div>
+        </div>
+        <!-- <div id="message">
+            <p id="status-message">hhh</p>
+        </div> -->
+        <div class="readings">
+            <!-- Temperature Reading Block -->
+            <div class="gauge">
+                <ul class="meter">
+                    <li class="low"></li>
+                    <li class="normal"></li>
+                    <li class="high"></li>
+                </ul>
+                <div class="dial">
+                    <div class="inner">
+                        <div class="arrow" id="temperature-arrow"></div>
+                    </div>
+                </div>
+                <div class="value" id="temperature-value">0%</div>
+            </div>
+            <span class="temperature-reading" id="temperature-reading"> Temperature: </span>
+
+            <!-- Humidity Reading Block -->
+            <div class="gauge">
+                <ul class="meter">
+                    <li class="low"></li>
+                    <li class="normal"></li>
+                    <li class="high"></li>
+                </ul>
+                <div class="dial">
+                    <div class="inner">
+                        <div class="arrow" id="humidity-arrow"></div>
+                    </div>
+                </div>
+                <div class="value" id="humidity-value">0%</div>
+            </div>
+            <span class="humidity-reading" id="humidity-reading">Humidity: </span>
+
+            <!-- Light Intensity Reading Block -->
+            <div class="gauge">
+                <ul class="meter">
+                    <li class="low"></li>
+                    <li class="normal"></li>
+                    <li class="high"></li>
+                </ul>
+                <div class="dial">
+                    <div class="inner">
+                        <div class="arrow" id="light-intensity-arrow"></div>
+                    </div>
+                </div>
+                <div class="value" id="light-intensity-value">0%</div>
+            </div>
+            <span class="light-intensity" id="light-intensity">Light intensity: </span>
+
+            <!-- Battery Percentage Reading Block -->
+            <div class="gauge">
+                <ul class="meter">
+                    <li class="low"></li>
+                    <li class="normal"></li>
+                    <li class="high"></li>
+                </ul>
+                <div class="dial">
+                    <div class="inner">
+                        <div class="arrow" id="battery-percent-arrow"></div>
+                    </div>
+                </div>
+                <div class="value" id="battery-percent-value">0%</div>
+            </div>
+            <span class="battery-percent" id="battery-percent">Battery percentage: </span>
+
+            <!-- Energy Reading Block -->
+            <div class="gauge">
+                <ul class="meter">
+                    <li class="low"></li>
+                    <li class="normal"></li>
+                    <li class="high"></li>
+                </ul>
+                <div class="dial">
+                    <div class="inner">
+                        <div class="arrow" id="energy-reading-arrow"></div>
+                    </div>
+                </div>
+                <div class="value" id="energy-reading-value">0%</div>
+            </div>
+            <span class="energy-reading" id="energy-reading">Energy reading: </span>
+        </div>
+    </div>
+</body>
+
+</html>
