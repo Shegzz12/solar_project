@@ -15,7 +15,7 @@ app = Flask(__name__, static_url_path='/static')
 CORS(app)
 
 # Initialize values to be used if no data is received
-result = 0
+result = 3
 office = 0
 lab = 0
 Temperature = 36
@@ -118,7 +118,7 @@ def index():
 @app.route('/get_real_time_data', methods=['GET'])
 def get_real_time_data():
     # print("temp")
-    predict_user_input()
+    # predict_user_input()
     try:
         real_time_data = {
             'office': office,
