@@ -1,7 +1,7 @@
 import joblib
 import numpy as np
 
-model_path = "solarRF.pkl"
+model_path = "solarSVMfbf.pkl"
 
 # model_abs_path = os.path.join(os.getcwd(), model_path)
 model = joblib.load(model_path)
