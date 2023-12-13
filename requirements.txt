@@ -4,7 +4,6 @@ gunicorn
 numpy
 joblib
 scikit-learn
-csv
 datetime
 threading
 os
