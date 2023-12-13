@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Function to fetch real-time data from the server
     function pollForRealTimeData() {
         // Fetch real-time data from the server
-        fetch('http://localhost:5000/get_real_time_data')
+        fetch('https://intelligentsolar.onrender.com/get_real_time_data')
             .then(response => response.json())
             .then(updateRealTimeData)
             .catch(error => console.error('Error:', error));
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         // Make a POST request to the server's endpoint with the appliance ID
-        fetch(`http://127.0.0.1:5000/receive_state`, {
+        fetch(`https://intelligentsolar.onrender.com/receive_state`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -89,7 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Function to fetch data and update the gauges
     function fetchData() {
-        fetch('http://localhost:5000/get_real_time_data')
+        fetch('https://intelligentsolar.onrender.com/get_real_time_data')
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
