@@ -15,12 +15,12 @@ app = Flask(__name__, static_url_path='/static')
 CORS(app)
 
 # Initialize values to be used if no data is received
-result = 3
+result = 0
 office = 0
 lab = 0
 Temperature = 36
 Humidity = 50
-Light_intensity = 3500
+Light_intensity = 35
 Battery_percentage = 30
 energy_reading = 20
 timestamp = ""
@@ -35,6 +35,12 @@ fieldnames = ['TIMESTAMP', 'LIGHT', 'TEMPERATURE', 'HUMIDITY', 'BATTERY_PERCENTA
 def download_csv():
     #Sends the database to the front end for download
     return send_file(csv_file_path, as_attachment=True)
+
+
+@app.route('/download_dataset')
+def download_dataset():
+    #Sends the database to the front end for download
+    return send_file('sd.csv', as_attachment=True)
 
 def read_records():
     records = []
@@ -118,7 +124,7 @@ def index():
 @app.route('/get_real_time_data', methods=['GET'])
 def get_real_time_data():
     # print("temp")
-    # predict_user_input()
+    # #predict_user_input()
     try:
         real_time_data = {
             'office': office,
