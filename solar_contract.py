@@ -30,7 +30,7 @@ weather = "Weather not so favorable for energy generation"
 advice = "Reduce energy use on both lab & office"
 
 csv_file_path = 'database.csv'
-fieldnames = ['TIMESTAMP', 'LIGHT', 'TEMPERATURE', 'HUMIDITY', 'BATTERY_PERCENTAGE', 'RESULT', 'LAB_ENERGY', 'OFFICE_ENERGY]
+fieldnames = ['TIMESTAMP', 'LIGHT', 'TEMPERATURE', 'HUMIDITY', 'BATTERY_PERCENTAGE', 'RESULT', 'LAB_ENERGY', 'OFFICE_ENERGY']
 
 
 @app.route('/download_csv')
