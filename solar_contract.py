@@ -21,7 +21,7 @@ lab = 0
 Temperature = 36
 Humidity = 50
 Light_intensity = 35
-Light_percent = 70
+Light_percent = ((Light_intensity /50)*100)
 Battery_percentage = 30
 energy_reading = 20
 energy_reading2 = 20
@@ -77,7 +77,7 @@ def write_records(records):
                 'TEMPERATURE': record['TEMPERATURE'],
                 'HUMIDITY': record['HUMIDITY'],
                 'BATTERY_PERCENTAGE': record['BATTERY_PERCENTAGE'],
-                'RESULT': record['RESULT']
+                'RESULT': record['RESULT'],
                 'LAB_ENERGY': record['LAB_ENERGY'],
                 'OFFICE_ENERGY': record['OFFICE_ENERGY'],
             })
@@ -191,9 +191,9 @@ def receive_data():
                     'TEMPERATURE': Temperature,
                     'HUMIDITY': Humidity,
                     'BATTERY_PERCENTAGE': Battery_percentage,
-                    'RESULT': result
-                    'LAB_ENERGY': energy_reading
-                    'OFFICE_ENERGY': energy_reading2
+                    'RESULT': result,
+                    'LAB_ENERGY': energy_reading,
+                    'OFFICE_ENERGY': energy_reading2,
                 }
                 records.append(new_record)
 
