@@ -198,6 +198,11 @@ def receive_data():
             }
             records.append(new_record)
 
+             # Print the new_record before appending
+            print("New record:", new_record)
+
+            records.append(new_record)
+
             # Write the updated records to the CSV file
             write_records(records)
 
@@ -207,8 +212,11 @@ def receive_data():
     except json.JSONDecodeError:
         return "Invalid JSON format", 400
     except Exception as e:
+        # Print the stack trace to identify the error
+        import traceback
+        traceback.print_exc()
         return f"Error: {str(e)}", 400
-
+        
 @app.route('/gas_state', methods=['GET'])
 def predict_user_input():
 
