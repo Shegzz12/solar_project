@@ -21,14 +21,16 @@ lab = 0
 Temperature = 36
 Humidity = 50
 Light_intensity = 35
+Light_percent = 70
 Battery_percentage = 30
 energy_reading = 20
+energy_reading2 = 20
 timestamp = ""
 weather = "Weather not so favorable for energy generation"
 advice = "Reduce energy use on both lab & office"
 
 csv_file_path = 'database.csv'
-fieldnames = ['TIMESTAMP', 'LIGHT', 'TEMPERATURE', 'HUMIDITY', 'BATTERY_PERCENTAGE', 'RESULT']
+fieldnames = ['TIMESTAMP', 'LIGHT', 'TEMPERATURE', 'HUMIDITY', 'BATTERY_PERCENTAGE', 'RESULT', 'LAB_ENERGY', 'OFFICE_ENERGY]
 
 
 @app.route('/download_csv')
@@ -54,6 +56,8 @@ def read_records():
                 'HUMIDITY': row['HUMIDITY'],
                 'BATTERY_PERCENTAGE': row['BATTERY_PERCENTAGE'],
                 'RESULT': row['RESULT'],
+                'LAB_ENERGY': row['LAB_ENERGY'],
+                'OFFICE_ENERGY': row['OFFICE_ENERGY'],
             })
     return records
 
@@ -74,6 +78,8 @@ def write_records(records):
                 'HUMIDITY': record['HUMIDITY'],
                 'BATTERY_PERCENTAGE': record['BATTERY_PERCENTAGE'],
                 'RESULT': record['RESULT']
+                'LAB_ENERGY': record['LAB_ENERGY'],
+                'OFFICE_ENERGY': record['OFFICE_ENERGY'],
             })
 
 
@@ -131,9 +137,10 @@ def get_real_time_data():
             'lab': lab,
             'Temperature': Temperature,
             'Humidity': Humidity,
-            'Light_intensity': Light_intensity,
+            'Light_intensity': Light_percent,
             'Battery_percentage': Battery_percentage,
             'energy_reading': energy_reading,
+            'energy_reading2': energy_reading2,
             'result': result,
             'weather': weather,
             'advice': advice
@@ -157,20 +164,22 @@ def get_value():
 
 @app.route('/send_data', methods=['POST'])
 def receive_data():
-    global timestamp, Temperature, Humidity, Light_intensity, Battery_percentage, energy_reading, result
+    global timestamp, Temperature, Humidity, Light_intensity, Light_percent, Battery_percentage, energy_reading, energy_reading2, result
     try:
             received_data = request.get_json()
             print("Received data:", received_data)  # Add this line to print the received data
             # Read existing records
             records = read_records()
 
-            if 'temp' in received_data and 'hum' in received_data and 'light' in received_data and 'percentage' in received_data and 'energy_reading' in received_data:
+            if 'temp' in received_data and 'hum' in received_data and 'light' in received_data and 'percentage' in received_data and 'energy_reading' in received_data and 'energy_reading2' in received_data:
                 Temperature = received_data['temp']
                 Humidity = received_data['hum']
                 Light_intensity = received_data['light']
                 Battery_percentage = received_data['percentage']
                 energy_reading = received_data['energy_reading']
-                print(f"Received temp: {Temperature}, hum: {Humidity}, light: {Light_intensity}, percentage: {Battery_percentage}, energy_reading: {energy_reading}")
+                energy_reading2 = received_data['energy_reading2']
+                Light_percent = ((Light_intensity /50)*100)
+                print(f"Received temp: {Temperature}, hum: {Humidity}, light: {Light_intensity}, lightP: {Light_percent}, percentage: {Battery_percentage}, energy_reading: {energy_reading}, energy_reading2: {energy_reading2}")
 
                 timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
@@ -178,11 +187,13 @@ def receive_data():
                 # Append the received data to the CSV file
                 new_record = {
                     'TIMESTAMP': timestamp,
-                    'LIGHT': Light_intensity,
+                    'LIGHT': Light_percent,
                     'TEMPERATURE': Temperature,
                     'HUMIDITY': Humidity,
                     'BATTERY_PERCENTAGE': Battery_percentage,
                     'RESULT': result
+                    'LAB_ENERGY': energy_reading
+                    'OFFICE_ENERGY': energy_reading2
                 }
                 records.append(new_record)
 
