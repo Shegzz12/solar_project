@@ -200,11 +200,13 @@ def receive_data():
                 # Write the updated records to the CSV file
                 write_records(records)
 
-                return "Data received and saved successfully", 200
-            else:
-                return "Invalid data format", 400
-    except Exception as e:
-        return f"Error: {str(e)}", 400
+                    return "Data received and saved successfully", 200
+                else:
+                    return "Invalid data format", 400
+                except json.JSONDecodeError:
+                    return "Invalid JSON format", 400
+                except Exception as e:
+                    return f"Error: {str(e)}", 400
 
 @app.route('/gas_state', methods=['GET'])
 def predict_user_input():
