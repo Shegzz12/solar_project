@@ -166,47 +166,47 @@ def get_value():
 def receive_data():
     global timestamp, Temperature, Humidity, Light_intensity, Light_percent, Battery_percentage, energy_reading, energy_reading2, result
     try:
-            received_data = request.get_json()
-            print("Received data:", received_data)  # Add this line to print the received data
-            # Read existing records
-            records = read_records()
+        received_data = request.get_json()
+        print("Received data:", received_data)  # Add this line to print the received data
+        # Read existing records
+        records = read_records()
 
-            if 'temp' in received_data and 'hum' in received_data and 'light' in received_data and 'percentage' in received_data and 'energy_reading' in received_data and 'energy_reading2' in received_data:
-                Temperature = received_data['temp']
-                Humidity = received_data['hum']
-                Light_intensity = received_data['light']
-                Battery_percentage = received_data['percentage']
-                energy_reading = received_data['energy_reading']
-                energy_reading2 = received_data['energy_reading2']
-                Light_percent = ((Light_intensity /50)*100)
-                print(f"Received temp: {Temperature}, hum: {Humidity}, light: {Light_intensity}, lightP: {Light_percent}, percentage: {Battery_percentage}, energy_reading: {energy_reading}, energy_reading2: {energy_reading2}")
+        if 'temp' in received_data and 'hum' in received_data and 'light' in received_data and 'percentage' in received_data and 'energy_reading' in received_data and 'energy_reading2' in received_data:
+            Temperature = received_data['temp']
+            Humidity = received_data['hum']
+            Light_intensity = received_data['light']
+            Battery_percentage = received_data['percentage']
+            energy_reading = received_data['energy_reading']
+            energy_reading2 = received_data['energy_reading2']
+            Light_percent = ((Light_intensity /50)*100)
+            print(f"Received temp: {Temperature}, hum: {Humidity}, light: {Light_intensity}, lightP: {Light_percent}, percentage: {Battery_percentage}, energy_reading: {energy_reading}, energy_reading2: {energy_reading2}")
 
-                timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-                predict_user_input()
-                # Append the received data to the CSV file
-                new_record = {
-                    'TIMESTAMP': timestamp,
-                    'LIGHT': Light_percent,
-                    'TEMPERATURE': Temperature,
-                    'HUMIDITY': Humidity,
-                    'BATTERY_PERCENTAGE': Battery_percentage,
-                    'RESULT': result,
-                    'LAB_ENERGY': energy_reading,
-                    'OFFICE_ENERGY': energy_reading2,
-                }
-                records.append(new_record)
+            predict_user_input()
+            # Append the received data to the CSV file
+            new_record = {
+                'TIMESTAMP': timestamp,
+                'LIGHT': Light_percent,
+                'TEMPERATURE': Temperature,
+                'HUMIDITY': Humidity,
+                'BATTERY_PERCENTAGE': Battery_percentage,
+                'RESULT': result,
+                'LAB_ENERGY': energy_reading,
+                'OFFICE_ENERGY': energy_reading2,
+            }
+            records.append(new_record)
 
-                # Write the updated records to the CSV file
-                write_records(records)
+            # Write the updated records to the CSV file
+            write_records(records)
 
-                    return "Data received and saved successfully", 200
-                else:
-                    return "Invalid data format", 400
-                except json.JSONDecodeError:
-                    return "Invalid JSON format", 400
-                except Exception as e:
-                    return f"Error: {str(e)}", 400
+            return "Data received and saved successfully", 200
+        else:
+            return "Invalid data format", 400
+    except json.JSONDecodeError:
+        return "Invalid JSON format", 400
+    except Exception as e:
+        return f"Error: {str(e)}", 400
 
 @app.route('/gas_state', methods=['GET'])
 def predict_user_input():
