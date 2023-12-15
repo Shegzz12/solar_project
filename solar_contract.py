@@ -172,15 +172,15 @@ def receive_data():
         # Read existing records
         records = read_records()
 
-        if 'temp' in received_data and 'hum' in received_data and 'light' in received_data and 'percentage' in received_data and 'energy_reading' in received_data and 'energy_reading2' in received_data:
+        if 'temp' in received_data and 'hum' in received_data and 'light' in received_data and 'percentage' in received_data and 'Energy_reading' in received_data and 'Energy_reading2' in received_data:
             Temperature = received_data['temp']
             Humidity = received_data['hum']
             Light_intensity = received_data['light']
             Battery_percentage = received_data['percentage']
-            energy_reading = received_data['energy_reading']
-            energy_reading2 = received_data['energy_reading2']
+            energy_reading = received_data.get('Energy_reading', 0)  # Default to 0 if key is not present
+            energy_reading2 = received_data.get('Energy_reading2', 0)  # Default to 0 if key is not present
             Light_percent = ((Light_intensity /50)*100)
-            print(f"Received temp: {Temperature}, hum: {Humidity}, light: {Light_intensity}, lightP: {Light_percent}, percentage: {Battery_percentage}, energy_reading: {energy_reading}, energy_reading2: {energy_reading2}")
+            print(f"Received temp: {Temperature}, hum: {Humidity}, light: {Light_intensity}, lightP: {Light_percent}, percentage: {Battery_percentage}, Energy_reading: {energy_reading}, Energy_reading2: {energy_reading2}")
 
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
